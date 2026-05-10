@@ -16,7 +16,7 @@ app.get("/send/:id", (req, res) => {
     mssg: params,
   };
   channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)));
-
+  
   return res.status(200).json({ msg: "add to queue" });
 });
 app.listen(PORT, () => {
