@@ -1,5 +1,5 @@
 import express from "express";
-import { channel, queue } from "./client";
+import { channel, exchange } from "./client";
 
 const app = express();
 
@@ -15,8 +15,9 @@ app.get("/send/:id", (req, res) => {
     id: Math.random() * 100,
     mssg: params,
   };
-  channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)));
-  
+  //   channel.sendToQueue(queue, Buffer.from(JSON.stringify(data)));
+  //fanout
+  channel.publish(exchange, "", Buffer.from(JSON.stringify(data)));
   return res.status(200).json({ msg: "add to queue" });
 });
 app.listen(PORT, () => {
