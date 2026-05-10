@@ -4,12 +4,18 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/express": "^5.0.6"
+  },
+  "scripts": {
+    "dev": "bun --hot index.ts",
+    "rabbitmq": "bun --hot recieve.ts"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
-    "amqplib": "^2.0.1"
+    "amqplib": "^2.0.1",
+    "express": "^5.2.1"
   }
 }

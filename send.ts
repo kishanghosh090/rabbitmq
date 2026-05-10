@@ -1,14 +1,11 @@
-import amqp from "amqplib";
-const connection = await amqp.connect("amqp://localhost");
-// create a channel
-export const channel = await connection.createChannel();
+import { channel, queue } from "./client";
 
 // queue name
-const queue = "chai";
 
 // message
 const msg = "Hello World!";
 
+// declare a queue (if not exists)
 await channel.assertQueue(queue, {
   durable: true,
   arguments: {
@@ -16,5 +13,5 @@ await channel.assertQueue(queue, {
   },
 });
 
-channel.sendToQueue(queue, Buffer.from(msg));
-console.log(" [x] Sent %s", msg);
+// channel.sendToQueue(queue, Buffer.from(msg));
+// console.log(" [x] Sent %s", msg);

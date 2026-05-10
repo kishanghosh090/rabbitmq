@@ -1,7 +1,7 @@
 # rabbitmq
 
 To install dependencies:
-
+curl "http://localhost:4002/send/hello%20this%20is%20chai%20message%20for%20process"
 ```bash
 bun install
 ```
