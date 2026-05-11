@@ -20,6 +20,20 @@ app.get("/send/:id", (req, res) => {
   channel.publish(exchange, "", Buffer.from(JSON.stringify(data)));
   return res.status(200).json({ msg: "add to queue" });
 });
+
+// Route Handling:
+app.get("/", (req, res) => {
+  res.status(200).send("Hello! this is Route /");
+});
+
+app.get("/get", (req, res) => {
+  res.status(200).json({ message: "You are Route /GET" });
+});
+
+app.post("/post", (req, res) => {
+  let myJson = req.body;
+  res.status(200).send(myJson);
+});
 app.listen(PORT, () => {
   console.log("server is listing at port", PORT);
 });

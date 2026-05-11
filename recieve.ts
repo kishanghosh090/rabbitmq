@@ -73,23 +73,30 @@ async function main() {
   channel.bindQueue(q1.queue, exchange, "");
   channel.bindQueue(q2.queue, exchange, "");
 
+  console.log("consumber 1 is ready", q1.queue);
+  channel.prefetch(1);
   channel.consume(
     q1.queue,
-    function (msg) {
+    async function (msg) {
       if (msg!!.content) {
         console.log(" [x] %s", msg!!.content.toString());
       }
+      await sleep();
     },
     {
       noAck: true,
     },
   );
+
+  console.log("consumber 2 is ready", q2.queue);
+  channel.prefetch(1);
   channel.consume(
     q2.queue,
-    function (msg) {
+    async function (msg) {
       if (msg!!.content) {
         console.log(" [x] %s", msg!!.content.toString());
       }
+      await sleep();
     },
     {
       noAck: true,
@@ -97,4 +104,9 @@ async function main() {
   );
 }
 
+async function sleep() {
+  setTimeout(() => {
+    console.log("done...");
+  }, 2000);
+}
 main();
